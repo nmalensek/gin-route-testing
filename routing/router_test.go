@@ -83,8 +83,9 @@ func TestRoute(t *testing.T) {
 		path:         "/users",
 		body:         nil,
 		wantRespCode: http.StatusOK,
-		want:         &mockUser{Users: "mock response"},
-		got:          &mockUser{},
+		// use pointers here or go can't unmarshal to specific struct
+		want: &mockUser{Users: "mock response"},
+		got:  &mockUser{},
 	}
 
 	doRouteTest(t, rt)
